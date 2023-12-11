@@ -255,4 +255,28 @@ function populateSelectMenu(JSONuser) {
     return select;
 }
 
+/*
+10. getUsers
+a. Fetches users data from: https://jsonplaceholder.typicode.com/ (look at
+Resources section)
+b. Should be an async function
+c. Should utilize a try / catch block
+d. Uses the fetch API to request all users
+e. Await the users data response
+f. Return the JSON data
+*/
+
+async function getUsers() {
+    try {
+        const userData = await fetch('https://jsonplaceholder.typicode.com/users');
+        if (!userData.ok) {
+            throw new Error('Data unable to be gotten');
+        }
+        const userJSON = await userData.json();
+        return userJSON;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 function toggleComments(a, b) {}
