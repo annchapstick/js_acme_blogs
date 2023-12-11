@@ -152,20 +152,20 @@ function until we get there.
 */
 
 function addButtonListeners() {
-    //select all buttons in main
+  //select all buttons in main
   const buttons = document.querySelectorAll("main button");
-  const selectedButtons = [];
   //loop through each button in list
-  buttons.forEach(button => {
-    const postId = button.dataset.postId;
-    //if postId exists...
-    if (postId) {
-      button.addEventListener('click', (event) => toggleComments(event, postId));
-      selectedButtons.push(button);
-    }
-  });
+  if (buttons) {
+    buttons.forEach(button => {
+      const postId = button.dataset.postId;
+      //if postId exists...
+      if (postId) {
+        button.addEventListener('click', (event) => toggleComments(event, postId), false);
+      }
+    });
+  }
     //return array of selected buttons
-    return selectedButtons;
+    return buttons;
 }
 
 /*
@@ -189,7 +189,7 @@ function removeButtonListeners() {
         const postId = button.dataset.postId;
         //if postId exist...
         if (postId) {
-            button.removeEventListener('click', (event) => toggleComments(event, postId));
+            button.removeEventListener('click', (event) => toggleComments(event, postId), false);
             selectedButtons.push(button);
         }
     });
