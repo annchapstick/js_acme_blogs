@@ -81,3 +81,31 @@ function toggleCommentSection(postId) {
     return section;
 }
 
+/*
+4. toggleCommentButton
+a. Receives a postId as the parameter
+b. Selects the button with the data-post-id attribute equal to the postId received as a
+parameter
+c. If the button textContent is 'Show Comments' switch textContent to 'Hide
+Comments'
+d. If the button textContent is 'Hide Comments' switch textContent to 'Show
+Comments'
+e. Suggestion (not required) for above: try a ternary statement
+f. Return the button element
+*/
+
+function toggleCommentButton(postId) {
+    //return undefined if postId not provided
+    if (!postId) return;
+    //b.
+    const button = document.querySelector(`button[data-post-id='${postId}']`);
+    //verifies button, change textContent
+    if (button) {
+        (button.textContent === 'Show Comments') ? button.textContent = 'Hide Comments' : button.textContent = 'Show Comments';
+    }
+    //return null if parameter does not match postid
+    else {
+        return null;
+    }
+    return button;
+}
