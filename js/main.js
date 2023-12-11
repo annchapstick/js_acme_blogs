@@ -155,7 +155,7 @@ function addButtonListeners() {
     //select all buttons in main
   const buttons = document.querySelectorAll("main button");
   const selectedButtons = [];
-  //if buttons exist, loop through each button in list
+  //loop through each button in list
   buttons.forEach(button => {
     const postId = button.dataset.postId;
     //if postId exists...
@@ -181,15 +181,19 @@ f. Return the button elements which were selected
 */
 
 function removeButtonListeners() {
+    //select buttons in main
     const buttons = document.querySelectorAll("main button");
     const selectedButtons = [];
+    //loop through each button in list
     buttons.forEach(button => {
         const postId = button.dataset.postId;
+        //if postId exist...
         if (postId) {
             button.removeEventListener('click', (event) => toggleComments(event, postId));
             selectedButtons.push(button);
         }
     });
+    //return array of selected buttons
     return selectedButtons;
 }
 
@@ -211,19 +215,44 @@ l. Return the fragment element
 */
 
 function createComments(JSONcomment) {
-    if (!JSONcomment) return;
-    let fragment = document.createDocumentFragment();
-    JSONcomment.forEach(comment => {
-        let article = document.createElement("article");
-        const h3 = createElemWithText('h3', comment.name);
-        const p1 = createElemWithText('p', comment.body);
-        const p2 = createElemWithText('p', `From: ${comment.email}`);
-        article.appendChild(h3);
-        article.appendChild(p1);
-        article.appendChild(p2);
-        fragment.appendChild(article);
+    //check if param exist
+      if (!JSONcomment) return;
+      let fragment = document.createDocumentFragment();
+    //for each comment, f-k
+      JSONcomment.forEach(comment => {
+          let article = document.createElement("article");
+          const h3 = createElemWithText('h3', comment.name);
+          const p1 = createElemWithText('p', comment.body);
+          const p2 = createElemWithText('p', `From: ${comment.email}`);
+          article.append(h3);
+          article.append(p1);
+          article.append(p2);
+          fragment.append(article);
+      })
+      return fragment;
+  }
+
+/*
+9. populateSelectMenu
+a. Depends on the createSelectOptions function we created
+b. Receives the users JSON data as a parameter
+c. Selects the #selectMenu element by id
+d. Passes the users JSON data to createSelectOptions()
+e. Receives an array of option elements from createSelectOptions
+f. Loops through the options elements and appends each option element to the
+select menu
+g. Return the selectMenu element
+*/
+
+function populateSelectMenu(JSONuser) {
+    //check if param exist
+    if (!JSONuser) return;
+    const select = document.getElementById("selectMenu");
+    const options = createSelectOptions(JSONuser);
+    options.forEach(option => {
+        select.append(option);
     })
-    return fragment;
+    return select;
 }
 
 function toggleComments(a, b) {}
