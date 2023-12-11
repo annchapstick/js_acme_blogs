@@ -132,3 +132,44 @@ function deleteChildElements(parentElement) {
     }
     return parentElement;
 }
+
+/*
+6. addButtonListeners
+a. Selects all buttons nested inside the main element
+b. If buttons exist:
+c. Loop through the NodeList of buttons
+d. Gets the postId from button.dataset.postId
+e. If a postId exists, add a click event listener to the button (reference
+addEventListener) - inside the loop so this happens to each button
+f. The listener calls an anonymous function (see cheatsheet)
+g. Inside the anonymous function: the function toggleComments is called with the
+event and postId as parameters
+h. Return the button elements which were selected
+i. You may want to define an empty toggleComments function for now. The listener
+test will NOT pass for addButtonListeners until toggleComments is completed.
+Nevertheless, I recommend waiting on the logic inside the toggleComments
+function until we get there.
+*/
+
+function addButtonListeners() {
+    //select all buttons in main
+    const buttons = main.querySelectorAll("button");
+    const selectedButton = [];
+    //if buttons exist, loop through each button in list
+    if (buttons) {
+         buttons.forEach((button) => {
+            const postId = button.dataset.postId;
+            if (postId) {
+                button.addEventListener("click", function (e) {toggleComments(e, postId)}, false);
+                selectedButton.push(button);
+            }
+         })
+    }
+    //return empty nodelist if no buttons found
+    else {
+        return selectedButton;
+    }
+    return selectedButton;
+}
+
+function toggleComments() {}
