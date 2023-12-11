@@ -212,18 +212,18 @@ l. Return the fragment element
 
 function createComments(JSONcomment) {
     if (!JSONcomment) return;
-    const fragment = document.createDocumentFragment();
+    let fragment = document.createDocumentFragment();
     JSONcomment.forEach(comment => {
-        const article = document.createElement();
+        let article = document.createElement("article");
         const h3 = createElemWithText('h3', comment.name);
         const p1 = createElemWithText('p', comment.body);
         const p2 = createElemWithText('p', `From: ${comment.email}`);
-        h3.append(article);
-        p1.append(article);
-        p2.append(article);
-        article.append(fragment);
-        return fragment;
+        article.appendChild(h3);
+        article.appendChild(p1);
+        article.appendChild(p2);
+        fragment.appendChild(article);
     })
+    return fragment;
 }
 
 function toggleComments(a, b) {}
