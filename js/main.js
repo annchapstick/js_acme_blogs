@@ -503,9 +503,46 @@ toggleCommentButton: [section, button]
 */
 
 function toggleComments(event, postId) {
+    //check if both exist, if not return
     if (!event || !postId) return;
+    //c
     event.target.listener = true;
+    //d
     const section = toggleCommentSection(postId);
+    //f
     const button = toggleCommentButton(postId);
+    //h
     return [section, button];
+}
+
+/*
+18. refreshPosts
+a. Dependencies: removeButtonListeners, deleteChildElements, displayPosts,
+addButtonListeners
+b. Is an async function
+c. Receives posts JSON data as a parameter
+d. Call removeButtonListeners
+e. Result of removeButtonListeners is the buttons returned from this function
+f. Call deleteChildElements with the main element passed in as the parameter
+g. Result of deleteChildElements is the return of the main element
+h. Passes posts JSON data to displayPosts and awaits completion
+i. Result of displayPosts is a document fragment
+j. Call addButtonListeners
+k. Result of addButtonListeners is the buttons returned from this function
+l. Return an array of the results from the functions called: [removeButtons, main,
+fragment, addButtons]
+*/
+
+async function refreshPosts(postJSON) {
+    if (!postJSON) return;
+    //d
+    const removeButtons = removeButtonListeners();
+    //f
+    const main = deleteChildElements(document.querySelector("main"));
+    //h
+    const fragment = await displayPosts(postJSON);
+    //j
+    const addButtons = addButtonListeners();
+    //l
+    return [removeButtons, main, fragment, addButtons];
 }
