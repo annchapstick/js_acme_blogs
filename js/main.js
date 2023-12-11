@@ -366,4 +366,31 @@ async function getPostComments(postId) {
     }
 }
 
+/*
+14. displayComments
+a. Dependencies: getPostComments, createComments
+b. Is an async function
+c. Receives a postId as a parameter
+d. Creates a section element with document.createElement()
+e. Sets an attribute on the section element with section.dataset.postId
+f. Adds the classes 'comments' and 'hide' to the section element
+g. Creates a variable comments equal to the result of await
+getPostComments(postId);
+h. Creates a variable named fragment equal to createComments(comments)
+i. Append the fragment to the section
+j. Return the section element
+*/
+
+async function displayComments(postId) {
+    if (!postId) return;
+    let section = document.createElement("section");
+    section.dataset.postId = postId;
+    section.classList.add("comments");
+    section.classList.add("hide");
+    const comments = await getPostComments(postId);
+    const fragment = createComments(comments);
+    section.append(fragment);
+    return section;
+}
+
 function toggleComments(a, b) {}
