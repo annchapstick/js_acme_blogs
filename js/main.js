@@ -460,4 +460,30 @@ async function createPosts(postJSONdata) {
     return fragment;
 }
 
+/*
+16. displayPosts
+a. Dependencies: createPosts, createElemWithText
+b. Is an async function
+c. Receives posts data as a parameter
+d. Selects the main element
+e. Defines a variable named element that is equal to:
+i. IF posts exist: the element returned from await createPosts(posts)
+ii. IF post data does not exist: create a paragraph element that is identical to
+the default paragraph found in the html file.
+iii. Optional suggestion: use a ternary for this conditional
+f. Appends the element to the main element
+g. Returns the element variable
+*/
+
+async function displayPosts(postData) {
+    //d.
+    const main = document.querySelector("main");
+    //ternary - if i, then createposts but if ii. main p
+    const element = (postData) ? await createPosts(postData) : document.querySelector("main p");
+    //f.
+    main.append(element);
+    //g.
+    return element;
+}
+
 function toggleComments(a, b) {}
