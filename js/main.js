@@ -153,8 +153,7 @@ function until we get there.
 
 function addButtonListeners() {
     //select all buttons in main
-  const main = document.querySelector("main");
-  const buttons = main.querySelectorAll("button");
+  const buttons = document.querySelectorAll("main button");
   const selectedButtons = [];
   //if buttons exist, loop through each button in list
   buttons.forEach(button => {
@@ -166,6 +165,31 @@ function addButtonListeners() {
     }
   });
     //return array of selected buttons
+    return selectedButtons;
+}
+
+/*
+7. removeButtonListeners
+a. Selects all buttons nested inside the main element
+b. Loops through the NodeList of buttons
+c. Gets the postId from button.dataset.id
+d. If a postId exists, remove the click event listener from the button (reference
+removeEventListener) - inside the loop so this happens to each button
+e. Refer to the addButtonListeners function as this should be nearly identical
+f. Return the button elements which were selected
+
+*/
+
+function removeButtonListeners() {
+    const buttons = document.querySelectorAll("main button");
+    const selectedButtons = [];
+    buttons.forEach(button => {
+        const postId = button.dataset.postId;
+        if (postId) {
+            button.removeEventListener('click', (event) => toggleComments(event, postId));
+            selectedButtons.push(button);
+        }
+    });
     return selectedButtons;
 }
 
