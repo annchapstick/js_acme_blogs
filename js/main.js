@@ -193,4 +193,37 @@ function removeButtonListeners() {
     return selectedButtons;
 }
 
+/*
+8. createComments
+a. Depends on the createElemWithText function we created
+b. Receives JSON comments data as a parameter
+c. Creates a fragment element with document.createDocumentFragment()
+d. Loop through the comments
+e. For each comment do the following:
+f. Create an article element with document.createElement()
+g. Create an h3 element with createElemWithText('h3', comment.name)
+h. Create an paragraph element with createElemWithText('p', comment.body)
+i. Create an paragraph element with createElemWithText('p', `From:
+${comment.email}`)
+j. Append the h3 and paragraphs to the article element (see cheatsheet)
+k. Append the article element to the fragment
+l. Return the fragment element
+*/
+
+function createComments(JSONcomment) {
+    if (!JSONcomment) return;
+    const fragment = document.createDocumentFragment();
+    JSONcomment.forEach(comment => {
+        const article = document.createElement();
+        const h3 = createElemWithText('h3', comment.name);
+        const p1 = createElemWithText('p', comment.body);
+        const p2 = createElemWithText('p', `From: ${comment.email}`);
+        h3.append(article);
+        p1.append(article);
+        p2.append(article);
+        article.append(fragment);
+        return fragment;
+    })
+}
+
 function toggleComments(a, b) {}
