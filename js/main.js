@@ -593,3 +593,31 @@ async function initPage() {
     const select = populateSelectMenu(userJSON);
     return [userJSON, select];
 }
+
+/*
+21. initApp
+a. Dependencies: initPage, selectMenuChangeEventHandler
+b. Call the initPage() function.
+c. Select the #selectMenu element by id
+d. Add an event listener to the #selectMenu for the “change” event
+e. The event listener should call selectMenuChangeEventHandler when the change
+event fires for the #selectMenu
+f. NOTE: All of the above needs to be correct for your app to function correctly.
+However, I can only test if the initApp function exists. It does not return anything.
+*/
+
+async function initApp() {
+    initPage();
+    const selectMenu = document.getElementById("selectMenu");
+    selectMenu.addEventListener('change', selectMenuChangeEventHandler, false);
+}
+
+/*
+*** This must be underneath the definition of initApp in your file.
+1. Add an event listener to the document.
+2. Listen for the “DOMContentLoaded” event.
+3. Put initApp in the listener as the event handler function.
+4. This will call initApp after the DOM content has loaded and your app will be started.
+*/
+
+document.addEventListener('DOMContentLoaded', initApp, false);
