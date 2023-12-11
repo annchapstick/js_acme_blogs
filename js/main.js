@@ -340,4 +340,30 @@ async function getUser(userId) {
     }
 }
 
+/*
+13. getPostComments
+a. Receives a post id as a parameter
+b. Fetches comments for a specific post id from:
+https://jsonplaceholder.typicode.com/ (look at Routes section)
+c. Should be an async function
+d. Should utilize a try / catch block
+e. Uses the fetch API to request all comments for a specific post id
+f. Await the users data response
+g. Return the JSON data
+*/
+
+async function getPostComments(postId) {
+    if (!postId) return;
+    try {
+        const postComment = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`);
+        if(!postComment.ok) {
+            throw new Error('Data unable to be gathered');
+        }
+        const postJSON = await postComment.json();
+        return postJSON;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 function toggleComments(a, b) {}
