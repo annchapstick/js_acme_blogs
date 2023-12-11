@@ -109,3 +109,26 @@ function toggleCommentButton(postId) {
     }
     return button;
 }
+
+/*
+5. deleteChildElements
+a. Receives a parentElement as a parameter
+b. Define a child variable as parentElement.lastElementChild
+c. While the child exists…(use a while loop)
+d. Use parentElement.removeChild to remove the child in the loop
+e. Reassign child to parentElement.lastElementChild in the loop
+f. Return the parentElement
+*/
+
+function deleteChildElements(parentElement) {
+    //return unfedined if not an HTML element
+    if (!parentElement?.tagName) return;
+    //define child
+    let child = parentElement.lastElementChild;
+    //while child exists, d & e
+    while(child) {
+        parentElement.removeChild(child);
+        child = parentElement.lastElementChild;
+    }
+    return parentElement;
+}
