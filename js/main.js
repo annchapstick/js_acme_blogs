@@ -479,9 +479,17 @@ async function displayPosts(postData) {
     //d.
     const main = document.querySelector("main");
     //ternary - if i, then createposts but if ii. main p
-    const element = (postData) ? await createPosts(postData) : document.querySelector("main p");
+    let element;
+    if (postData) {
+        element = document.createDocumentFragment();
+        const posts = await createPosts(postData);
+        element.append(posts);
+    } else {
+        element = createElemWithText('p', 'Select an Employee to display their posts.');
+        element.classList.add('default-text');
+    }
     //f.
-    main.append(element);
+    main.appendChild(element);
     //g.
     return element;
 }
