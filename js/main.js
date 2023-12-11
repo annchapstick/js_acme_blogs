@@ -38,11 +38,9 @@ h. Assigns the user.name to the option.textContent
 i. Return an array of options elements
 */
 
-async function createSelectOptions(userJSON) {
+function createSelectOptions(userJSON) {
     //test parameter exists, if not return
-    if (!userJSON) {
-        return;
-    }
+    if (!userJSON) return;
     const optionArray = [];
     //create an option foreach user, assign value and textcontent
     userJSON.forEach(user => {
@@ -53,3 +51,33 @@ async function createSelectOptions(userJSON) {
     })
     return optionArray;
 }
+
+/*
+3. toggleCommentSection
+a. Receives a postId as the parameter
+b. Selects the section element with the data-post-id attribute equal to the postId
+received as a parameter
+c. Use code to verify the section exists before attempting to access the classList
+property
+d. At this point in your code, the section will not exist. You can create one to test if
+desired.
+e. Toggles the class 'hide' on the section element
+f. Return the section element
+*/
+
+function toggleCommentSection(postId) {
+    //return undefined if postId not provided
+    if (!postId) return;
+    //b.
+    const section = document.querySelector(`section[data-post-id='${postId}']`);
+    //verify section, toggle hide
+    if (section) {
+        section.classList.toggle('hide');
+    }
+    //if parameter does not match a postID, return null
+    else {
+        return null;
+    }
+    return section;
+}
+
