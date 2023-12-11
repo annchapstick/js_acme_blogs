@@ -393,4 +393,71 @@ async function displayComments(postId) {
     return section;
 }
 
+/*
+15. createPosts
+a. Dependencies: createElemWithText, getUser, displayComments
+b. Is an async function
+c. Receives posts JSON data as a parameter
+d. Create a fragment element with document.createDocumentFragment()
+e. Loops through the posts data
+f. For each post do the following:
+g. Create an article element with document.createElement()
+h. Create an h2 element with the post title
+i. Create an p element with the post body
+j. Create another p element with text of `Post ID: ${post.id}`
+k. Define an author variable equal to the result of await getUser(post.userId)
+l. Create another p element with text of `Author: ${author.name} with
+${author.company.name}`
+m. Create another p element with the author’s company catch phrase.
+n. Create a button with the text 'Show Comments'
+o. Set an attribute on the button with button.dataset.postId = post.id
+p. Append the h2, paragraphs, button, and section elements you have created to
+the article element.
+q. Create a variable named section equal to the result of await
+displayComments(post.id);
+r. Append the section element to the article element
+s. After the loop completes, append the article element to the fragment
+t. Return the fragment element
+*/
+
+async function createPosts(postJSONdata) {
+    if (!postJSONdata) return;
+    //d.
+    const fragment = document.createDocumentFragment();
+    for (const post of postJSONdata) {
+        let article = document.createElement("article");
+        //h.
+        let h2 = createElemWithText('h2', post.title);
+        //i.
+        let p1 = createElemWithText('p', post.body);
+        //j.
+        let p2 = createElemWithText('p', `Post ID: ${post.id}`);
+        //k.
+        let author = await getUser(post.userId);
+        //l. 
+        let p3 = createElemWithText('p', `Author: ${author.name} with ${author.company.name}`);
+        //m
+        let p4 = createElemWithText('p', `${author.company.catchPhrase}`);
+        //n
+        let button = createElemWithText('button', `Show Comments`);
+        //o
+        button.dataset.postId = post.id;
+        //p
+        article.append(h2);
+        article.append(p1);
+        article.append(p2);
+        article.append(p3);
+        article.append(p4);
+        article.append(button);
+        //q
+        let section = await displayComments(post.id);
+        //r
+        article.append(section);
+        //s
+        fragment.append(article);
+    }
+    //t
+    return fragment;
+}
+
 function toggleComments(a, b) {}
