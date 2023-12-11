@@ -153,23 +153,20 @@ function until we get there.
 
 function addButtonListeners() {
     //select all buttons in main
-    const buttons = main.querySelectorAll("button");
-    const selectedButton = [];
-    //if buttons exist, loop through each button in list
-    if (buttons) {
-         buttons.forEach((button) => {
-            const postId = button.dataset.postId;
-            if (postId) {
-                button.addEventListener("click", function (e) {toggleComments(e, postId)}, false);
-                selectedButton.push(button);
-            }
-         })
+  const main = document.querySelector("main");
+  const buttons = main.querySelectorAll("button");
+  const selectedButtons = [];
+  //if buttons exist, loop through each button in list
+  buttons.forEach(button => {
+    const postId = button.dataset.postId;
+    //if postId exists...
+    if (postId) {
+      button.addEventListener('click', (event) => toggleComments(event, postId));
+      selectedButtons.push(button);
     }
-    //return empty nodelist if no buttons found
-    else {
-        return selectedButton;
-    }
-    return selectedButton;
+  });
+    //return array of selected buttons
+    return selectedButtons;
 }
 
-function toggleComments() {}
+function toggleComments(a, b) {}
