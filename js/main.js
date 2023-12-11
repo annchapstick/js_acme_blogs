@@ -546,3 +546,31 @@ async function refreshPosts(postJSON) {
     //l
     return [removeButtons, main, fragment, addButtons];
 }
+
+/*
+19. selectMenuChangeEventHandler
+a. Dependencies: getUserPosts, refreshPosts
+b. Should be an async function
+c. Automatically receives the event as a parameter (see cheatsheet)
+d. Disables the select menu when called into action (disabled property)
+e. Defines userId = event.target.value || 1; (see cheatsheet)
+f. Passes the userId parameter to await getUserPosts
+g. Result is the posts JSON data
+h. Passes the posts JSON data to await refreshPosts
+i. Result is the refreshPostsArray
+j. Enables the select menu after results are received (disabled property)
+k. Return an array with the userId, posts and the array returned from refreshPosts:
+[userId, posts, refreshPostsArray]
+*/
+
+async function selectMenuChangeEventHandler(event) {
+    if (!event) return;
+    //e
+    const userId = event?.target?.value || 1;
+    //f
+    const postJSON = await getUserPosts(userId);
+    //g
+    const refreshPostsArray = await refreshPosts(postJSON);
+    //k
+    return [userId, postJSON, refreshPostsArray];
+}
