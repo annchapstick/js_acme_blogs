@@ -574,3 +574,22 @@ async function selectMenuChangeEventHandler(event) {
     //k
     return [userId, postJSON, refreshPostsArray];
 }
+
+/*
+20. initPage
+a. Dependencies: getUsers, populateSelectMenu
+b. Should be an async function
+c. No parameters.
+d. Call await getUsers
+e. Result is the users JSON data
+f. Passes the users JSON data to the populateSelectMenu function
+g. Result is the select element returned from populateSelectMenu
+h. Return an array with users JSON data from getUsers and the select element
+result from populateSelectMenu: [users, select]
+*/
+
+async function initPage() {
+    const userJSON = await getUsers();
+    const select = populateSelectMenu(userJSON);
+    return [userJSON, select];
+}
