@@ -269,11 +269,45 @@ f. Return the JSON data
 async function getUsers() {
     try {
         const userData = await fetch('https://jsonplaceholder.typicode.com/users');
+        //throws error if cant fetch
         if (!userData.ok) {
-            throw new Error('Data unable to be gotten');
+            throw new Error('Data unable to be gathered');
         }
         const userJSON = await userData.json();
         return userJSON;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+/*
+11. getUserPosts
+a. Receives a user id as a parameter
+b. Fetches post data for a specific user id from:
+https://jsonplaceholder.typicode.com/ (look at Routes section)
+c. Should be an async function
+d. Should utilize a try / catch block
+e. Uses the fetch API to request all posts for a specific user id
+f. Await the users data response
+g. Return the JSON data
+*/
+
+async function getUserPosts(userId) {
+    if (!userId) return;
+    try {
+        const postArray = [];
+        const postData = await fetch('https://jsonplaceholder.typicode.com/posts');
+        //throws error if cant fetch
+        if (!postData.ok) {
+            throw new Error('Data unable to be gathered');
+        }
+        const JSONposts = await postData.json();
+        JSONposts.forEach(post => {
+            if (post.userId === userId) {
+                postArray.push(post);
+            }
+        })
+        return postArray;
     } catch (error) {
         console.log(error);
     }
